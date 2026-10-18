@@ -1,0 +1,24 @@
+{
+  "name": "managed-registry",
+  "version": "0.1.0-alpha.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "start": "bun src/index.ts",
+    "test": "bun test",
+    "test:provider": "bun --no-env-file tests/live-provider.ts",
+    "test:image": "bun --no-env-file tests/image-smoke.ts",
+    "preview": "bun --no-env-file tests/preview.ts"
+  },
+  "dependencies": {
+    "@webdock/plugin-sdk": "file:vendor/webdock-plugin-sdk-0.1.0.tgz",
+    "elysia": "1.4.30",
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "@types/node": "24.10.1",
+    "@types/bun": "1.3.0"
+  }
+}

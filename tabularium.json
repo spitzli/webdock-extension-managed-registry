@@ -1,0 +1,447 @@
+{
+  "name": "managed-registry",
+  "version": "0.1.0-alpha.1",
+  "kind": "extension",
+  "description": "Manage a dedicated Tabularium plugin registry from your Webdock project. Operator-managed alpha.",
+  "protocolVersion": 1,
+  "sdkVersion": 1,
+  "dataProtocolVersion": 1,
+  "coreVersion": ">=0.1.0 <1.0.0",
+  "image": "ghcr.io/spitzli/webdock-extension-managed-registry@sha256:d13685f9b345e949761fd3d2ee522a7960cd3d00afc6fe327c8d91bb8428da7c",
+  "dependencies": [],
+  "capabilities": [
+    "plugin.http.read",
+    "plugin.http.request"
+  ],
+  "schemaVersion": 1,
+  "readableSchema": {
+    "min": 1,
+    "max": 1
+  },
+  "migrations": [],
+  "tables": [],
+  "services": {
+    "required": [
+      {
+        "name": "http",
+        "version": 1
+      }
+    ],
+    "optional": []
+  },
+  "configuration": {
+    "type": "object",
+    "properties": {
+      "registry_origin": {
+        "type": "string",
+        "maxLength": 200
+      },
+      "allowed_kind_keys": {
+        "maxItems": 50,
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        }
+      }
+    },
+    "required": [
+      "registry_origin",
+      "allowed_kind_keys"
+    ],
+    "additionalProperties": false
+  },
+  "actions": [
+    {
+      "name": "registry.overview",
+      "intent": "read",
+      "capabilities": [
+        "plugin.http.read"
+      ],
+      "input": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "registry.branding.read",
+      "intent": "read",
+      "capabilities": [
+        "plugin.http.read"
+      ],
+      "input": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "registry.branding.update",
+      "intent": "write",
+      "capabilities": [
+        "plugin.http.read",
+        "plugin.http.request"
+      ],
+      "input": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60
+          },
+          "tagline": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "primary_hex": {
+            "type": "string",
+            "minLength": 7,
+            "maxLength": 7
+          },
+          "accent_hex": {
+            "type": "string",
+            "minLength": 7,
+            "maxLength": 7
+          },
+          "success_hex": {
+            "type": "string",
+            "minLength": 7,
+            "maxLength": 7
+          },
+          "footer_text": {
+            "type": "string",
+            "maxLength": 1000
+          },
+          "allow_indexing": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "registry.settings.read",
+      "intent": "read",
+      "capabilities": [
+        "plugin.http.read"
+      ],
+      "input": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "registry.settings.update",
+      "intent": "write",
+      "capabilities": [
+        "plugin.http.read",
+        "plugin.http.request"
+      ],
+      "input": {
+        "type": "object",
+        "properties": {
+          "docs_external_url": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "require_approval": {
+            "type": "boolean"
+          },
+          "manifest_require_kind": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "registry.kinds.list",
+      "intent": "read",
+      "capabilities": [
+        "plugin.http.read"
+      ],
+      "input": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "registry.kinds.create",
+      "intent": "write",
+      "capabilities": [
+        "plugin.http.read",
+        "plugin.http.request"
+      ],
+      "input": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 280
+          },
+          "public_page_enabled": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "key",
+          "label"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "registry.kinds.update",
+      "intent": "write",
+      "capabilities": [
+        "plugin.http.read",
+        "plugin.http.request"
+      ],
+      "input": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 280
+          },
+          "public_page_enabled": {
+            "type": "boolean"
+          },
+          "extensions_schema_json": {
+            "type": "string",
+            "maxLength": 32768
+          }
+        },
+        "required": [
+          "key",
+          "label"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "registry.extensions.read",
+      "intent": "read",
+      "capabilities": [
+        "plugin.http.read"
+      ],
+      "input": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "registry.extensions.update",
+      "intent": "write",
+      "capabilities": [
+        "plugin.http.read",
+        "plugin.http.request"
+      ],
+      "input": {
+        "type": "object",
+        "properties": {
+          "extensions_json": {
+            "type": "string",
+            "maxLength": 32768
+          }
+        },
+        "required": [
+          "extensions_json"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "registry.providers.list",
+      "intent": "read",
+      "capabilities": [
+        "plugin.http.read"
+      ],
+      "input": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  ],
+  "api": [
+    {
+      "action": "registry.overview",
+      "method": "GET",
+      "path": "/overview"
+    },
+    {
+      "action": "registry.branding.read",
+      "method": "GET",
+      "path": "/branding"
+    },
+    {
+      "action": "registry.branding.update",
+      "method": "PUT",
+      "path": "/branding"
+    },
+    {
+      "action": "registry.settings.read",
+      "method": "GET",
+      "path": "/settings"
+    },
+    {
+      "action": "registry.settings.update",
+      "method": "PUT",
+      "path": "/settings"
+    },
+    {
+      "action": "registry.kinds.list",
+      "method": "GET",
+      "path": "/kinds"
+    },
+    {
+      "action": "registry.kinds.create",
+      "method": "POST",
+      "path": "/kinds"
+    },
+    {
+      "action": "registry.kinds.update",
+      "method": "PUT",
+      "path": "/kinds"
+    },
+    {
+      "action": "registry.extensions.read",
+      "method": "GET",
+      "path": "/manifest/extensions"
+    },
+    {
+      "action": "registry.extensions.update",
+      "method": "PUT",
+      "path": "/manifest/extensions"
+    },
+    {
+      "action": "registry.providers.list",
+      "method": "GET",
+      "path": "/providers"
+    }
+  ],
+  "mcp": [
+    {
+      "name": "overview",
+      "action": "registry.overview",
+      "description": "Read project-scoped registry overview"
+    },
+    {
+      "name": "branding_read",
+      "action": "registry.branding.read",
+      "description": "Read project-scoped registry branding read"
+    },
+    {
+      "name": "branding_update",
+      "action": "registry.branding.update",
+      "description": "Update project-scoped registry branding update"
+    },
+    {
+      "name": "settings_read",
+      "action": "registry.settings.read",
+      "description": "Read project-scoped registry settings read"
+    },
+    {
+      "name": "settings_update",
+      "action": "registry.settings.update",
+      "description": "Update project-scoped registry settings update"
+    },
+    {
+      "name": "kinds_list",
+      "action": "registry.kinds.list",
+      "description": "Read project-scoped registry kinds list"
+    },
+    {
+      "name": "kinds_create",
+      "action": "registry.kinds.create",
+      "description": "Update project-scoped registry kinds create"
+    },
+    {
+      "name": "kinds_update",
+      "action": "registry.kinds.update",
+      "description": "Update project-scoped registry kinds update"
+    },
+    {
+      "name": "extensions_read",
+      "action": "registry.extensions.read",
+      "description": "Read project-scoped registry extensions read"
+    },
+    {
+      "name": "extensions_update",
+      "action": "registry.extensions.update",
+      "description": "Update project-scoped registry extensions update"
+    },
+    {
+      "name": "providers_list",
+      "action": "registry.providers.list",
+      "description": "Read project-scoped registry providers list"
+    }
+  ],
+  "jobs": [],
+  "navigation": [
+    {
+      "id": "registry",
+      "label": "Managed Registry",
+      "path": "/ui/registry"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "secrets": [],
+  "httpBindings": [
+    "registry"
+  ],
+  "category": "developer-tools",
+  "tags": [
+    "registry",
+    "tabularium",
+    "managed",
+    "alpha"
+  ],
+  "icon": "assets/icon.svg",
+  "readme": "README.md",
+  "homepage": "https://github.com/spitzli/webdock-extension-managed-registry",
+  "documentation_url": "https://github.com/spitzli/webdock-extension-managed-registry#readme",
+  "support": {
+    "issues_url": "https://github.com/spitzli/webdock-extension-managed-registry/issues"
+  },
+  "screenshots": [
+    {
+      "url": "screenshots/managed-registry-overview.png",
+      "alt": "Managed Registry overview in the local authoring host",
+      "caption": "English local authoring preview backed by a real disposable Tabularium and PostgreSQL instance; fictional Harbor project."
+    },
+    {
+      "url": "screenshots/managed-registry-branding.png",
+      "alt": "Managed Registry branding editor",
+      "caption": "Project-scoped branding controls in the local authoring host."
+    }
+  ]
+}
