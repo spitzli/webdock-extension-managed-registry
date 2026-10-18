@@ -1,4 +1,8 @@
-# Managed Registry
+# Managed Registry — withdrawn
+
+> **Do not install this alpha.** This separate registry-admin integration has been withdrawn. Tabularium belongs in Managed Apps as a dedicated customer application. Webdock manages app operation; customers configure branding, kinds, manifest fields and users in their own Tabularium instance. Shared Umami tracking remains a separate product.
+
+The source and immutable release artifacts are retained for traceability. The original implementation below is historical, not the supported integration direction.
 
 Manage a dedicated [Tabularium](https://github.com/tabularisdb/tabularium) plugin registry from your Webdock project. This is an **operator-managed alpha** (`0.1.0-alpha.1`): an operator provisions one Tabularium instance per Webdock project and connects it through a project-scoped Webdock HTTP binding.
 
