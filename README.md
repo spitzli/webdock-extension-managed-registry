@@ -123,7 +123,7 @@ bun test
 
 `src/registry.ts` exports `registryAction(ctx, action, input, {projectID, origin, allowedKindKeys})` for real-provider integration checks. It uses only `ctx.http.request` on the host binding `registry`. The security suite covers strict inputs, unsafe schema data, provider redaction, exact kind approval, complete kind preservation and signed runtime checks. A real provider smoke test may be run separately with operator-provided configuration.
 
-The image digest in `tabularium.json` must be replaced with the published alpha image digest before registry publication. No Kubernetes, SQL, database or provider credentials belong in this plugin or its configuration.
+The image in `tabularium.json` is pinned to the published alpha digest. Release manifest and universal descriptor contain identical bytes. No Kubernetes, SQL, database or provider credentials belong in this plugin or its configuration.
 
 ## Local acceptance
 
